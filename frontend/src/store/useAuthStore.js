@@ -1,0 +1,21 @@
+import { create } from "zustand";
+
+export const useAuthStore = create((set) => ({
+  authUser: null,
+  isSigningUp: false,
+  isLoggingIn: false,
+  isUpdatingProfile: false,
+
+  isCheckingAuth: true,
+
+  checkAuth: async () => {
+    try {
+        
+    } catch (error) {
+        console.error("Error checking auth:", error);
+        set({ authUser: null });
+    } finally {
+        set({ isCheckingAuth: false });
+    }
+  }
+}));
