@@ -59,7 +59,7 @@ const SignUpPage = () => {
                 onChange={(e) => setFormData({ ...formData, fullName: e.target.value })}
                 className="input input-bordered w-full pl-10"
               />
-              <User className="size-5 text-base-content/40 absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none" />
+              <User className="size-5 text-base-content/40 absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none z-10" />
             </div>
           </div>
 
@@ -76,7 +76,7 @@ const SignUpPage = () => {
                 onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                 className="input input-bordered w-full pl-10"
               />
-              <Mail className="size-5 text-base-content/40 absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none" />
+              <Mail className="size-5 text-base-content/40 absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none z-10" />
             </div>
           </div>
 
@@ -93,17 +93,17 @@ const SignUpPage = () => {
                 onChange={(e) => setFormData({ ...formData, password: e.target.value })}
                 className="input input-bordered w-full pl-10 pr-10"
               />
-              <Lock className="size-5 text-base-content/40 absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none" />
+              <Lock className="size-5 text-base-content/40 absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none z-10" />
               <button
                 type="button"
-                className="absolute right-3 top-1/2 -translate-y-1/2"
+                className="absolute right-3 top-1/2 -translate-y-1/2 z-10"
                 onClick={() => setShowPassword(!showPassword)}
               >
-                {showPassword ? (
-                  <EyeOff className="size-5 text-base-content/40" />
-                ) : (
-                  <Eye className="size-5 text-base-content/40" />
-                )}
+                 {showPassword ? (
+                    <EyeOff className="size-5 text-base-content/40" />
+                  ) : (
+                    <Eye className="size-5 text-base-content/40" />
+                  )}
               </button>
             </div>
           </div>
