@@ -9,12 +9,20 @@
   "keywords": [
     "chat",
     "app",
+    "nodejs",
+    "express",
+    "mongodb",
+    "socket.io",
+    "chat-app",
+    "real-time",
+    "websocket",
+    "chat-server",
     "backend"
   ],
-  "author": "Badashah Kumar",
+  "author": "Badshah Yadav",
   "type": "module",
   "license": "ISC",
-  "description": "",
+  "description": "A real-time chat app backend using Node.js, Express, MongoDB, and Socket.io.",
   "dependencies": {
     "bcryptjs": "^3.0.2",
     "cloudinary": "^2.7.0",
