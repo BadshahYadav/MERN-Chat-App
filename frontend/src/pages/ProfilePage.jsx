@@ -4,6 +4,7 @@ import { Camera, Mail, User } from "lucide-react";
 
 const ProfilePage = () => {
   const { authUser, isUpdatingProfile, updateProfile } = useAuthStore();
+  console.log("authUser.createdAt:", authUser?.createdAt);
   const [selectedImg, setSelectedImg] = useState(null);
 
   const handleImageUpload = async (e) => {
@@ -88,7 +89,24 @@ const ProfilePage = () => {
             <div className="space-y-3 text-sm">
               <div className="flex items-center justify-between py-2 border-b border-zinc-700">
                 <span>Member Since</span>
-                <span>{authUser.createdAt?.split("T")[0]}</span>
+                <span>
+                  {authUser?.createdAt
+                    ? (() => {
+                        try {
+                          // If it's a string in ISO format, just split
+                          if (typeof authUser.createdAt === "string" && authUser.createdAt.includes("T")) {
+                            return authUser.createdAt.split("T")[0];
+                          }
+                          // If it's a Date object or timestamp, convert
+                          const date = new Date(authUser.createdAt);
+                          if (isNaN(date)) return authUser.createdAt; // fallback to raw value
+                          return date.toISOString().split("T")[0];
+                        } catch {
+                          return authUser.createdAt;
+                        }
+                      })()
+                    : ""}
+                </span>
               </div>
               <div className="flex items-center justify-between py-2">
                 <span>Account Status</span>
