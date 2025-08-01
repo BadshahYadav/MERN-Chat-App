@@ -105,6 +105,19 @@ export const updateProfile = async (req, res) => {
       return res.status(400).json({ message: "Profile pic is required" });
     }
 
+    // Validate base64 size (estimate, allow for base64 overhead)
+    const MAX_SIZE_MB = 13; // base64 overhead for 10MB file
+    const MAX_SIZE_BYTES = MAX_SIZE_MB * 1024 * 1024;
+    // Remove base64 header if present
+    let base64String = profilePic;
+    if (base64String.includes(",")) {
+      base64String = base64String.split(",")[1];
+    }
+    const fileSize = Buffer.byteLength(base64String, 'base64');
+    if (fileSize > MAX_SIZE_BYTES) {
+      return res.status(400).json({ message: `File size should not exceed 10MB` });
+    }
+
     const uploadResponse = await cloudinary.uploader.upload(profilePic);
     const updatedUser = await User.findByIdAndUpdate(
       userId,

@@ -7,14 +7,18 @@ const ProfilePage = () => {
   console.log("authUser.createdAt:", authUser?.createdAt);
   const [selectedImg, setSelectedImg] = useState(null);
 
+  const MAX_SIZE_MB = 13;
   const handleImageUpload = async (e) => {
     const file = e.target.files[0];
     if (!file) return;
 
+    if (file.size > MAX_SIZE_MB * 1024 * 1024) {
+      alert(`File size should not exceed 10MB`);
+      return;
+    }
+
     const reader = new FileReader();
-
     reader.readAsDataURL(file);
-
     reader.onload = async () => {
       const base64Image = reader.result;
       setSelectedImg(base64Image);
