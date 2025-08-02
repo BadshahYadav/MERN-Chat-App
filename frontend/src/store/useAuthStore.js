@@ -16,13 +16,13 @@ export const useAuthStore = create((set, get) => ({
 
   checkAuth: async () => {
     try {
-      const token = localStorage.getItem("token");
-      if (!token) {
-        set({ authUser: null });
-        set({ isCheckingAuth: false });
-        return;
-      }
-      axiosInstance.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+      // const token = localStorage.getItem("token");
+      // if (!token) {
+      //   set({ authUser: null });
+      //   set({ isCheckingAuth: false });
+      //   return;
+      // }
+      // axiosInstance.defaults.headers.common["Authorization"] = `Bearer ${token}`;
       const res = await axiosInstance.get("/auth/check-auth");
       set({ authUser: res.data });
       get().connectSocket();
@@ -39,8 +39,8 @@ export const useAuthStore = create((set, get) => ({
     try {
       const res = await axiosInstance.post("/auth/signup", data);
       set({ authUser: res.data.user });
-      localStorage.setItem("token", res.data.token);
-      axiosInstance.defaults.headers.common["Authorization"] = `Bearer ${res.data.token}`;
+      // localStorage.setItem("token", res.data.token);
+      // axiosInstance.defaults.headers.common["Authorization"] = `Bearer ${res.data.token}`;
       toast.success("Account created successfully");
       get().connectSocket();
     } catch (error) {
@@ -55,8 +55,8 @@ export const useAuthStore = create((set, get) => ({
     try {
       const res = await axiosInstance.post("/auth/login", data);
       set({ authUser: res.data.user });
-      localStorage.setItem("token", res.data.token);
-      axiosInstance.defaults.headers.common["Authorization"] = `Bearer ${res.data.token}`;
+      // localStorage.setItem("token", res.data.token);
+      // axiosInstance.defaults.headers.common["Authorization"] = `Bearer ${res.data.token}`;
       toast.success("Logged in successfully");
       get().connectSocket();
     } catch (error) {
@@ -70,8 +70,8 @@ export const useAuthStore = create((set, get) => ({
     try {
       await axiosInstance.post("/auth/logout");
       set({ authUser: null });
-      localStorage.removeItem("token");
-      delete axiosInstance.defaults.headers.common["Authorization"];
+      // localStorage.removeItem("token");
+      // delete axiosInstance.defaults.headers.common["Authorization"];
       toast.success("Logged out successfully");
       get().disconnectSocket();
     } catch (error) {

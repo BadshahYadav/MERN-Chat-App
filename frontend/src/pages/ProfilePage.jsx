@@ -4,7 +4,6 @@ import { Camera, Mail, User } from "lucide-react";
 
 const ProfilePage = () => {
   const { authUser, isUpdatingProfile, updateProfile } = useAuthStore();
-  console.log("authUser.createdAt:", authUser?.createdAt);
   const [selectedImg, setSelectedImg] = useState(null);
 
   const MAX_SIZE_MB = 13;
