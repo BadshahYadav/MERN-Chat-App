@@ -25,7 +25,6 @@
   "description": "A real-time chat app backend using Node.js, Express, MongoDB, and Socket.io.",
   "dependencies": {
     "bcryptjs": "^3.0.2",
-    "chat-app": "file:..",
     "cloudinary": "^2.7.0",
     "cookie-parser": "^1.4.7",
     "cors": "^2.8.5",
