@@ -9,17 +9,13 @@ const MessageInput = () => {
   const fileInputRef = useRef(null);
   const { sendMessage } = useChatStore();
 
-  const MAX_SIZE_MB = 13;
   const handleImageChange = (e) => {
     const file = e.target.files[0];
     if (!file.type.startsWith("image/")) {
       toast.error("Please select an image file");
       return;
     }
-    if (file.size > MAX_SIZE_MB * 1024 * 1024) {
-      toast.error(`File size should not exceed 10MB`);
-      return;
-    }
+
     const reader = new FileReader();
     reader.onloadend = () => {
       setImagePreview(reader.result);

@@ -16,14 +16,8 @@ export const useAuthStore = create((set, get) => ({
 
   checkAuth: async () => {
     try {
-      // const token = localStorage.getItem("token");
-      // if (!token) {
-      //   set({ authUser: null });
-      //   set({ isCheckingAuth: false });
-      //   return;
-      // }
-      // axiosInstance.defaults.headers.common["Authorization"] = `Bearer ${token}`;
-      const res = await axiosInstance.get("/auth/check-auth");
+      const res = await axiosInstance.get("/auth/check");
+
       set({ authUser: res.data });
       get().connectSocket();
     } catch (error) {
@@ -38,9 +32,7 @@ export const useAuthStore = create((set, get) => ({
     set({ isSigningUp: true });
     try {
       const res = await axiosInstance.post("/auth/signup", data);
-      set({ authUser: res.data.user });
-      // localStorage.setItem("token", res.data.token);
-      // axiosInstance.defaults.headers.common["Authorization"] = `Bearer ${res.data.token}`;
+      set({ authUser: res.data });
       toast.success("Account created successfully");
       get().connectSocket();
     } catch (error) {
@@ -54,10 +46,9 @@ export const useAuthStore = create((set, get) => ({
     set({ isLoggingIn: true });
     try {
       const res = await axiosInstance.post("/auth/login", data);
-      set({ authUser: res.data.user });
-      // localStorage.setItem("token", res.data.token);
-      // axiosInstance.defaults.headers.common["Authorization"] = `Bearer ${res.data.token}`;
+      set({ authUser: res.data });
       toast.success("Logged in successfully");
+
       get().connectSocket();
     } catch (error) {
       toast.error(error.response.data.message);
@@ -70,8 +61,6 @@ export const useAuthStore = create((set, get) => ({
     try {
       await axiosInstance.post("/auth/logout");
       set({ authUser: null });
-      // localStorage.removeItem("token");
-      // delete axiosInstance.defaults.headers.common["Authorization"];
       toast.success("Logged out successfully");
       get().disconnectSocket();
     } catch (error) {
