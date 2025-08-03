@@ -259,6 +259,7 @@ If you have any questions or feedback, feel free to contact me via the [contact 
 
 ## License
 
-This project is open-source and available under the [MIT License](LICENSE).
+This project is open-source and available under the [MIT License](https://github.com/BadshahYadav/MERN-Chat-App/blob/main/LICENSE)
+
 
 
