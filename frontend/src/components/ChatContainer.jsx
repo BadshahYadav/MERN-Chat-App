@@ -1,10 +1,3 @@
-  if (!selectedUser) {
-    return (
-      <div className="flex-1 flex items-center justify-center text-lg text-base-content/70">
-        Select a chat to start messaging
-      </div>
-    );
-  }
 import { useChatStore } from "../store/useChatStore";
 import { useEffect, useRef } from "react";
 
@@ -26,13 +19,20 @@ const ChatContainer = () => {
   const { authUser } = useAuthStore();
   const messageEndRef = useRef(null);
 
+  if (!selectedUser) {
+    return (
+      <div className="flex-1 flex items-center justify-center text-lg text-base-content/70">
+        Select a chat to start messaging
+      </div>
+    );
+  }
+
   useEffect(() => {
+    if (!selectedUser) return;
     getMessages(selectedUser._id);
-
     subscribeToMessages();
-
     return () => unsubscribeFromMessages();
-  }, [selectedUser._id, getMessages, subscribeToMessages, unsubscribeFromMessages]);
+  }, [selectedUser, getMessages, subscribeToMessages, unsubscribeFromMessages]);
 
   useEffect(() => {
     if (messageEndRef.current && messages) {
