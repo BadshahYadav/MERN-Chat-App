@@ -1,3 +1,10 @@
+  if (!selectedUser) {
+    return (
+      <div className="flex-1 flex items-center justify-center text-lg text-base-content/70">
+        Select a chat to start messaging
+      </div>
+    );
+  }
 import { useChatStore } from "../store/useChatStore";
 import { useEffect, useRef } from "react";
 
