@@ -23,7 +23,7 @@ export const useAuthStore = create((set, get) => ({
         return;
       }
       axiosInstance.defaults.headers.common["Authorization"] = `Bearer ${token}`;
-      const res = await axiosInstance.get("/auth/check-auth");
+      const res = await axiosInstance.get("/auth/check");
       set({ authUser: res.data });
       get().connectSocket();
     } catch (error) {
