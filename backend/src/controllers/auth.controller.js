@@ -11,7 +11,9 @@ export const signup = async (req, res) => {
     }
 
     if (password.length < 6) {
-      return res.status(400).json({ message: "Password must be at least 6 characters" });
+      return res
+        .status(400)
+        .json({ message: "Password must be at least 6 characters" });
     }
 
     const user = await User.findOne({ email });
@@ -30,13 +32,17 @@ export const signup = async (req, res) => {
     if (newUser) {
       // generate jwt token here
       generateToken(newUser._id, res);
+      const token = req.cookies.jwt;
       await newUser.save();
 
       res.status(201).json({
-        _id: newUser._id,
-        fullName: newUser.fullName,
-        email: newUser.email,
-        profilePic: newUser.profilePic,
+        user: {
+          _id: newUser._id,
+          fullName: newUser.fullName,
+          email: newUser.email,
+          profilePic: newUser.profilePic,
+        },
+        token,
       });
     } else {
       res.status(400).json({ message: "Invalid user data" });
@@ -63,11 +69,16 @@ export const login = async (req, res) => {
 
     generateToken(user._id, res);
 
+    const token = req.cookies.jwt;
+
     res.status(200).json({
-      _id: user._id,
-      fullName: user.fullName,
-      email: user.email,
-      profilePic: user.profilePic,
+      user: {
+        _id: user._id,
+        fullName: user.fullName,
+        email: user.email,
+        profilePic: user.profilePic,
+      },
+      token,
     });
   } catch (error) {
     console.log("Error in login controller", error.message);
@@ -92,6 +103,19 @@ export const updateProfile = async (req, res) => {
 
     if (!profilePic) {
       return res.status(400).json({ message: "Profile pic is required" });
+    }
+
+    // Validate base64 size (estimate, allow for base64 overhead)
+    const MAX_SIZE_MB = 13; // base64 overhead for 10MB file
+    const MAX_SIZE_BYTES = MAX_SIZE_MB * 1024 * 1024;
+    // Remove base64 header if present
+    let base64String = profilePic;
+    if (base64String.includes(",")) {
+      base64String = base64String.split(",")[1];
+    }
+    const fileSize = Buffer.byteLength(base64String, 'base64');
+    if (fileSize > MAX_SIZE_BYTES) {
+      return res.status(400).json({ message: `File size should not exceed 10MB` });
     }
 
     const uploadResponse = await cloudinary.uploader.upload(profilePic);
