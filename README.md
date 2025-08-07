@@ -2,6 +2,12 @@
 
 This is a full-stack real-time chat application built using the MERN stack (MongoDB, Express.js, React.js, Node.js). It features secure user authentication with JWT and bcrypt, real-time one-to-one messaging via Socket.io, and a responsive UI styled with Tailwind CSS and DaisyUI. The backend handles RESTful APIs and WebSocket events, while the frontend delivers dynamic rendering with Vite. Messages and user data are efficiently managed in MongoDB. The application supports online status indicators and smooth user experience across devices. It is fully deployed on Render with environment variable support and a production-ready build process.
 
+## Screenshots
+
+<img align="center" src="https://github.com/BadshahYadav/MERN-Chat-App/blob/main/frontend/public/Screenshot%202025-08-07%20105443.png" width="1200" >
+<img align="center" src="https://github.com/BadshahYadav/MERN-Chat-App/blob/main/frontend/public/Screenshot%202025-08-07%20105547.png" width="1200" >
+
+
 ## Table of Contents
 
 - [Overview](#overview)
@@ -260,6 +266,7 @@ If you have any questions or feedback, feel free to contact me via the [contact 
 ## License
 
 This project is open-source and available under the [MIT License](https://github.com/BadshahYadav/MERN-Chat-App/blob/main/LICENSE)
+
 
 
 
